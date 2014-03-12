@@ -1,9 +1,7 @@
 package com.darren.realestatevirtualassistant.activity;
 
-import java.util.Locale;
-
-import android.app.SearchManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -12,16 +10,23 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.ActionProvider;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -30,6 +35,8 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.darren.realestatevirtualassistant.R;
+import com.darren.realestatevirtualassistant.utils.AppGlobal;
+import com.darren.realestatevirtualassistant.utils.Utils;
 
 public class MainNavigationDrawerActivity extends SherlockFragmentActivity
 {
@@ -133,20 +140,24 @@ public class MainNavigationDrawerActivity extends SherlockFragmentActivity
 		// Handle action buttons
 		switch ( item.getItemId() )
 		{
-			case R.id.action_websearch:
-				// create intent to perform web search for this planet
-				Intent intent = new Intent( Intent.ACTION_WEB_SEARCH );
-				intent.putExtra( SearchManager.QUERY, getSupportActionBar().getTitle() );
-				// catch event that there's no activity to handle intent
-				if( intent.resolveActivity( getPackageManager() ) != null )
-				{
-					startActivity( intent );
-				}
-				else
-				{
-					Toast.makeText( this, R.string.app_not_available, Toast.LENGTH_LONG ).show();
-				}
-				return true;
+		/*
+		 * case R.id.action_websearch:
+		 * // create intent to perform web search for this planet
+		 * Intent intent = new Intent( Intent.ACTION_WEB_SEARCH );
+		 * intent.putExtra( SearchManager.QUERY,
+		 * getSupportActionBar().getTitle() );
+		 * // catch event that there's no activity to handle intent
+		 * if( intent.resolveActivity( getPackageManager() ) != null )
+		 * {
+		 * startActivity( intent );
+		 * }
+		 * else
+		 * {
+		 * Toast.makeText( this, R.string.app_not_available, Toast.LENGTH_LONG
+		 * ).show();
+		 * }
+		 * return true;
+		 */
 			default:
 				return super.onOptionsItemSelected( item );
 		}
@@ -550,6 +561,78 @@ public class MainNavigationDrawerActivity extends SherlockFragmentActivity
 	public static class RealEstateFragment extends SherlockFragment
 	{
 		public static final String	ARG_REALESTATE_OPTION_NUMBER	= "option_number";
+		EditText					c_a_c_p							= null;			// (
+																						// EditText
+																						// )
+																						// rootView.findViewById(
+																						// R.id.fragment_should_i_buy_layout_cosmetic_acquisition_percentage_editText
+																						// );
+		EditText					a_a_c_p							= null;			// (
+																						// EditText
+																						// )
+																						// rootView.findViewById(
+																						// R.id.fragment_should_i_buy_layout_advanced_acquisition_percentage_editText
+																						// );
+		EditText					c_r_p							= null;			// (
+																						// EditText
+																						// )
+																						// rootView.findViewById(
+																						// R.id.fragment_should_i_buy_layout_cosmetic_renovation_percentage_editText
+																						// );
+		EditText					a_r_p							= null;			// (
+																						// EditText
+																						// )
+																						// rootView.findViewById(
+																						// R.id.fragment_should_i_buy_layout_advanced_renovation_percentage_editText
+																						// );
+		EditText					c_h_c_p							= null;			// (
+																						// EditText
+																						// )
+																						// rootView.findViewById(
+																						// R.id.fragment_should_i_buy_layout_cosmetic_holding_percentage_editText
+																						// );
+		EditText					a_h_c_p							= null;			// (
+																						// EditText
+																						// )
+																						// rootView.findViewById(
+																						// R.id.fragment_should_i_buy_layout_advanced_holding_percentage_editText
+																						// );
+		EditText					c_s_c_p							= null;			// (
+																						// EditText
+																						// )
+																						// rootView.findViewById(
+																						// R.id.fragment_should_i_buy_layout_cosmetic_selling_percentage_editText
+																						// );
+		EditText					a_s_c_p							= null;			// (
+																						// EditText
+																						// )
+																						// rootView.findViewById(
+																						// R.id.fragment_should_i_buy_layout_advanced_selling_percentage_editText
+																						// );
+		EditText					c_p_m_p							= null;			// (
+																						// EditText
+																						// )
+																						// rootView.findViewById(
+																						// R.id.fragment_should_i_buy_layout_cosmetic_profit_percentage_editText
+																						// );
+		EditText					a_p_m_p							= null;			// (
+																						// EditText
+																						// )
+																						// rootView.findViewById(
+																						// R.id.fragment_should_i_buy_layout_advanced_profit_percentage_editText
+																						// );
+		EditText					cosmeticPrice					= null;			// (
+																						// EditText
+																						// )
+																						// rootView.findViewById(
+																						// R.id.fragment_should_i_buy_layout_cosmetic_purchase_price_editText
+																						// );
+		TextView					tv_cosmetic_a					= null;
+		TextView					tv_cosmetic_r					= null;
+		TextView					tv_cosmetic_h					= null;
+		TextView					tv_cosmetic_s					= null;
+		TextView					tv_cosmetic_p					= null;
+		TextView					tv_cosmetic_totalSale			= null;
 
 		public RealEstateFragment()
 		{
@@ -561,14 +644,268 @@ public class MainNavigationDrawerActivity extends SherlockFragmentActivity
 		public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState )
 		{
 
-			View rootView = inflater.inflate( R.layout.fragment_planet, container, false );
-			int i = getArguments().getInt( ARG_REALESTATE_OPTION_NUMBER );
-			String option = getResources().getStringArray( R.array.options_array )[i];
+			View rootView = null;
 
-			int imageId = getResources().getIdentifier( option.toLowerCase( Locale.getDefault() ), "drawable", getActivity().getPackageName() );
-			( ( ImageView ) rootView.findViewById( R.id.image ) ).setImageResource( imageId );
-			getActivity().setTitle( option );
-			return rootView;
+			int i = getArguments().getInt( ARG_REALESTATE_OPTION_NUMBER );
+
+			switch ( i )
+			{
+				case 0:
+					rootView = inflater.inflate( R.layout.fragment_should_i_buy_layout, container, false );
+
+					setupUI( rootView.findViewById( R.id.fragment_should_i_buy_layout_tl_quickAnalysis ) );
+
+					SharedPreferences prefs = Utils.getSharedPreferences( getActivity().getApplicationContext() );
+					c_a_c_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_acquisition_percentage_editText );
+					a_a_c_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_advanced_acquisition_percentage_editText );
+					c_r_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_renovation_percentage_editText );
+					a_r_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_advanced_renovation_percentage_editText );
+					c_h_c_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_holding_percentage_editText );
+					a_h_c_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_advanced_holding_percentage_editText );
+					c_s_c_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_selling_percentage_editText );
+					a_s_c_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_advanced_selling_percentage_editText );
+					c_p_m_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_profit_percentage_editText );
+					a_p_m_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_advanced_profit_percentage_editText );
+					cosmeticPrice = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_purchase_price_editText );
+
+					tv_cosmetic_a = ( TextView ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_acquisition_price_editText );
+					tv_cosmetic_r = ( TextView ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_renovation_price_editText );
+					tv_cosmetic_h = ( TextView ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_holding_price_editText );
+					tv_cosmetic_s = ( TextView ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_selling_price_editText );
+					tv_cosmetic_p = ( TextView ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_profit_price_editText );
+
+					tv_cosmetic_totalSale = ( TextView ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_sale_price_price_Text );
+
+					// cosmeticPrice = (EditText)findViewById(R.id.textMessage);
+					cosmeticPrice.addTextChangedListener( new TextWatcher()
+					{
+						public void afterTextChanged( Editable s )
+						{
+
+							updatePricesCosmetic();
+						}
+
+						public void beforeTextChanged( CharSequence s, int start, int count, int after )
+						{
+
+						}
+
+						public void onTextChanged( CharSequence s, int start, int before, int count )
+						{
+
+							updatePricesCosmetic();
+						}
+					} );
+					if( prefs != null )
+					{
+						double cosmetic_aqusition_cost_percent = prefs.getInt( AppGlobal.APP_PREF_KEY_COSMETIC_ACQUISITION_COST_PERCENTAGE, -1 );
+						if( cosmetic_aqusition_cost_percent == -1 )
+						{
+							prefs.edit().putInt( AppGlobal.APP_PREF_KEY_COSMETIC_ACQUISITION_COST_PERCENTAGE, 5 );
+							c_a_c_p.setText( String.valueOf( 5 ) );
+						}
+						else
+						{
+							c_a_c_p.setText( String.valueOf( cosmetic_aqusition_cost_percent ) );
+						}
+
+						double advanced_aqusition_cost_percent = prefs.getInt( AppGlobal.APP_PREF_KEY_ADVANCED_ACQUISITION_COST_PERCENTAGE, -1 );
+						if( advanced_aqusition_cost_percent == -1 )
+						{
+							prefs.edit().putInt( AppGlobal.APP_PREF_KEY_ADVANCED_ACQUISITION_COST_PERCENTAGE, 5 );
+							a_a_c_p.setText( String.valueOf( 5 ) );
+						}
+						else
+						{
+							a_a_c_p.setText( String.valueOf( advanced_aqusition_cost_percent ) );
+						}
+
+						double cosmetic_renovation_percent = prefs.getInt( AppGlobal.APP_PREF_KEY_COSMETIC_RENOVATION_PERCENTAGE, -1 );
+						if( cosmetic_renovation_percent == -1 )
+						{
+							prefs.edit().putInt( AppGlobal.APP_PREF_KEY_COSMETIC_RENOVATION_PERCENTAGE, 10 );
+							c_r_p.setText( String.valueOf( 10 ) );
+						}
+						else
+						{
+							c_r_p.setText( String.valueOf( cosmetic_renovation_percent ) );
+						}
+
+						double advanced_renovation_percent = prefs.getInt( AppGlobal.APP_PREF_KEY_ADVANCED_RENOVATION_PERCENTAGE, -1 );
+						if( advanced_renovation_percent == -1 )
+						{
+							prefs.edit().putInt( AppGlobal.APP_PREF_KEY_ADVANCED_RENOVATION_PERCENTAGE, 22 );
+							a_r_p.setText( String.valueOf( 22 ) );
+						}
+						else
+						{
+							a_r_p.setText( String.valueOf( advanced_renovation_percent ) );
+						}
+
+						double cosmetic_holding_cost_percent = prefs.getInt( AppGlobal.APP_PREF_KEY_COSMETIC_HOLDING_COST_PERCENTAGE, -1 );
+						if( cosmetic_holding_cost_percent == -1 )
+						{
+							prefs.edit().putInt( AppGlobal.APP_PREF_KEY_COSMETIC_HOLDING_COST_PERCENTAGE, 4 );
+							c_h_c_p.setText( String.valueOf( 4 ) );
+						}
+						else
+						{
+							c_h_c_p.setText( String.valueOf( cosmetic_holding_cost_percent ) );
+						}
+
+						double advanced_holding_cost_percent = prefs.getInt( AppGlobal.APP_PREF_KEY_ADVANCED_HOLDING_COST_PERCENTAGE, -1 );
+						if( advanced_holding_cost_percent == -1 )
+						{
+							prefs.edit().putInt( AppGlobal.APP_PREF_KEY_ADVANCED_HOLDING_COST_PERCENTAGE, 4 );
+							a_h_c_p.setText( String.valueOf( 4 ) );
+						}
+						else
+						{
+							a_h_c_p.setText( String.valueOf( advanced_holding_cost_percent ) );
+						}
+
+						double cosmetic_selling_cost_percent = prefs.getInt( AppGlobal.APP_PREF_KEY_COSMETIC_SELLING_COST_PERCENTAGE, -1 );
+						if( cosmetic_selling_cost_percent == -1 )
+						{
+							prefs.edit().putInt( AppGlobal.APP_PREF_KEY_COSMETIC_SELLING_COST_PERCENTAGE, 4 );
+							c_s_c_p.setText( String.valueOf( 4 ) );
+						}
+						else
+						{
+							c_s_c_p.setText( String.valueOf( cosmetic_selling_cost_percent ) );
+						}
+
+						double advanced_selling_cost_percent = prefs.getInt( AppGlobal.APP_PREF_KEY_ADVANCED_SELLING_COST_PERCENTAGE, -1 );
+						if( advanced_selling_cost_percent == -1 )
+						{
+							prefs.edit().putInt( AppGlobal.APP_PREF_KEY_ADVANCED_SELLING_COST_PERCENTAGE, 4 );
+							a_s_c_p.setText( String.valueOf( 4 ) );
+						}
+						else
+						{
+							a_s_c_p.setText( String.valueOf( advanced_selling_cost_percent ) );
+						}
+
+						double cosmetic_profit_margin_percent = prefs.getInt( AppGlobal.APP_PREF_KEY_COSMETIC_PROFIT_MARGIN_PERCENTAGE, -1 );
+						if( cosmetic_profit_margin_percent == -1 )
+						{
+							prefs.edit().putInt( AppGlobal.APP_PREF_KEY_COSMETIC_PROFIT_MARGIN_PERCENTAGE, 12 );
+							c_p_m_p.setText( String.valueOf( 12 ) );
+						}
+						else
+						{
+							c_p_m_p.setText( String.valueOf( cosmetic_profit_margin_percent ) );
+						}
+
+						double advanced_profit_margin_percent = prefs.getInt( AppGlobal.APP_PREF_KEY_ADVANCED_PROFIT_MARGIN_PERCENTAGE, -1 );
+						if( advanced_profit_margin_percent == -1 )
+						{
+							prefs.edit().putInt( AppGlobal.APP_PREF_KEY_ADVANCED_PROFIT_MARGIN_PERCENTAGE, 15 );
+							a_p_m_p.setText( String.valueOf( 15 ) );
+						}
+						else
+						{
+							a_p_m_p.setText( String.valueOf( advanced_profit_margin_percent ) );
+						}
+					}
+
+					RadioGroup rg = ( RadioGroup ) rootView.findViewById( R.id.fragment_should_i_buy_layout_rdgroup_main );
+					rg.setOnCheckedChangeListener( new OnCheckedChangeListener()
+					{
+						@Override
+						public void onCheckedChanged( RadioGroup group, int checkedId )
+						{
+
+							switch ( checkedId )
+							{
+								case R.id.fragment_should_i_buy_layout_rdbtn_quick_analysis:
+									// TODO Something
+									Toast.makeText( getActivity().getApplicationContext(), "Quick Analysis", Toast.LENGTH_LONG ).show();
+									break;
+								case R.id.fragment_should_i_buy_layout_rdbtn_detailed_analysis:
+									// TODO Something
+									Toast.makeText( getActivity().getApplicationContext(), "Detailed Analysis", Toast.LENGTH_LONG ).show();
+									break;
+							}
+						}
+					} );
+
+					break;
+
+				default:
+					break;
+			}
+			/*
+			 * String option = getResources().getStringArray(
+			 * R.array.options_array )[i];
+			 * int imageId = getResources().getIdentifier( option.toLowerCase(
+			 * Locale.getDefault() ), "drawable", getActivity().getPackageName()
+			 * );
+			 * ( ( ImageView ) rootView.findViewById( R.id.image )
+			 * ).setImageResource( imageId );
+			 * getActivity().setTitle( option );
+			 */return rootView;
+		}
+
+		public void setupUI( View view )
+		{
+
+			// Set up touch listener for non-text box views to hide keyboard.
+			if( !( view instanceof EditText ) )
+			{
+
+				view.setOnTouchListener( new OnTouchListener()
+				{
+
+					public boolean onTouch( View v, MotionEvent event )
+					{
+
+						Utils.hideSoftKeyboard( getActivity() );
+						return false;
+					}
+
+				} );
+			}
+
+			// If a layout container, iterate over children and seed recursion.
+			if( view instanceof ViewGroup )
+			{
+
+				for( int i = 0 ; i < ( ( ViewGroup ) view ).getChildCount() ; i++ )
+				{
+
+					View innerView = ( ( ViewGroup ) view ).getChildAt( i );
+
+					setupUI( innerView );
+				}
+			}
+		}
+
+		public void updatePricesCosmetic()
+		{
+
+			try
+			{
+				double salePrice = Double.parseDouble( cosmeticPrice.getText().toString() );
+				double cosmeticAcquisitionCost = salePrice * ( Double.parseDouble( c_a_c_p.getText().toString() ) / 100 );
+				double cosmeticRenovation = salePrice * ( Double.parseDouble( c_r_p.getText().toString() ) / 100 );
+				double cosmeticHoldingCost = salePrice * ( Double.parseDouble( c_h_c_p.getText().toString() ) / 100 );
+				double cosmeticSellingCost = salePrice * ( Double.parseDouble( c_s_c_p.getText().toString() ) / 100 );
+				double cosmeticProfitMargin = salePrice * ( Double.parseDouble( c_p_m_p.getText().toString() ) / 100 );
+
+				double totalSellingPrice = salePrice + cosmeticAcquisitionCost + cosmeticRenovation + cosmeticHoldingCost + cosmeticSellingCost + cosmeticProfitMargin;
+				tv_cosmetic_a.setText( "$" + String.valueOf( cosmeticAcquisitionCost ) );
+				tv_cosmetic_r.setText( "$" + String.valueOf( cosmeticRenovation ) );
+				tv_cosmetic_h.setText( "$" + String.valueOf( cosmeticHoldingCost ) );
+				tv_cosmetic_s.setText( "$" + String.valueOf( cosmeticSellingCost ) );
+				tv_cosmetic_p.setText( "$" + String.valueOf( cosmeticProfitMargin ) );
+
+				tv_cosmetic_totalSale.setText( "$" + String.valueOf( totalSellingPrice ) );
+			}
+			catch ( Exception ex )
+			{
+			}
 		}
 	}
+
 }
