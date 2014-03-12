@@ -24,4 +24,15 @@ public class AppGlobal
 	public static final String	APP_PREF_LAST_INSERTED_ID							= "_lastInsertedId_";
 	public static final String	APP_PREF_NAME										= "REAL_ESTATE_VIRTUAL_ASSISTANT_APP_PREFS";
 
+	public static final String	APP_PREF_KEY_COSMETIC_ACQUISITION_COST_PERCENTAGE	= "_acquisition_cost_percentage_costmetic";
+	public static final String	APP_PREF_KEY_ADVANCED_ACQUISITION_COST_PERCENTAGE	= "_acquisition_cost_percentage_advanced";
+	public static final String	APP_PREF_KEY_COSMETIC_RENOVATION_PERCENTAGE			= "_renovation_percentage_costmetic";
+	public static final String	APP_PREF_KEY_ADVANCED_RENOVATION_PERCENTAGE			= "_renovation_percentage_advanced";
+	public static final String	APP_PREF_KEY_COSMETIC_HOLDING_COST_PERCENTAGE		= "_holding_cost_percentage_costmetic";
+	public static final String	APP_PREF_KEY_ADVANCED_HOLDING_COST_PERCENTAGE		= "_holding_cost_percentage_advanced";
+	public static final String	APP_PREF_KEY_COSMETIC_SELLING_COST_PERCENTAGE		= "_selling_cost_percentage_costmetic";
+	public static final String	APP_PREF_KEY_ADVANCED_SELLING_COST_PERCENTAGE		= "_selling_cost_percentage_advanced";
+	public static final String	APP_PREF_KEY_COSMETIC_PROFIT_MARGIN_PERCENTAGE		= "_profit_margin_percentage_costmetic";
+	public static final String	APP_PREF_KEY_ADVANCED_PROFIT_MARGIN_PERCENTAGE		= "_profit_margin_percentage_advanced";
+
 }
