@@ -561,72 +561,12 @@ public class MainNavigationDrawerActivity extends SherlockFragmentActivity
 	public static class RealEstateFragment extends SherlockFragment
 	{
 		public static final String	ARG_REALESTATE_OPTION_NUMBER	= "option_number";
-		EditText					c_a_c_p							= null;			// (
-																						// EditText
-																						// )
-																						// rootView.findViewById(
-																						// R.id.fragment_should_i_buy_layout_cosmetic_acquisition_percentage_editText
-																						// );
-		EditText					a_a_c_p							= null;			// (
-																						// EditText
-																						// )
-																						// rootView.findViewById(
-																						// R.id.fragment_should_i_buy_layout_advanced_acquisition_percentage_editText
-																						// );
-		EditText					c_r_p							= null;			// (
-																						// EditText
-																						// )
-																						// rootView.findViewById(
-																						// R.id.fragment_should_i_buy_layout_cosmetic_renovation_percentage_editText
-																						// );
-		EditText					a_r_p							= null;			// (
-																						// EditText
-																						// )
-																						// rootView.findViewById(
-																						// R.id.fragment_should_i_buy_layout_advanced_renovation_percentage_editText
-																						// );
-		EditText					c_h_c_p							= null;			// (
-																						// EditText
-																						// )
-																						// rootView.findViewById(
-																						// R.id.fragment_should_i_buy_layout_cosmetic_holding_percentage_editText
-																						// );
-		EditText					a_h_c_p							= null;			// (
-																						// EditText
-																						// )
-																						// rootView.findViewById(
-																						// R.id.fragment_should_i_buy_layout_advanced_holding_percentage_editText
-																						// );
-		EditText					c_s_c_p							= null;			// (
-																						// EditText
-																						// )
-																						// rootView.findViewById(
-																						// R.id.fragment_should_i_buy_layout_cosmetic_selling_percentage_editText
-																						// );
-		EditText					a_s_c_p							= null;			// (
-																						// EditText
-																						// )
-																						// rootView.findViewById(
-																						// R.id.fragment_should_i_buy_layout_advanced_selling_percentage_editText
-																						// );
-		EditText					c_p_m_p							= null;			// (
-																						// EditText
-																						// )
-																						// rootView.findViewById(
-																						// R.id.fragment_should_i_buy_layout_cosmetic_profit_percentage_editText
-																						// );
-		EditText					a_p_m_p							= null;			// (
-																						// EditText
-																						// )
-																						// rootView.findViewById(
-																						// R.id.fragment_should_i_buy_layout_advanced_profit_percentage_editText
-																						// );
-		EditText					cosmeticPrice					= null;			// (
-																						// EditText
-																						// )
-																						// rootView.findViewById(
-																						// R.id.fragment_should_i_buy_layout_cosmetic_purchase_price_editText
-																						// );
+		EditText					c_a_c_p							= null;
+		EditText					c_r_p							= null;
+		EditText					c_h_c_p							= null;
+		EditText					c_s_c_p							= null;
+		EditText					c_p_m_p							= null;
+		EditText					cosmeticPrice					= null;
 		TextView					tv_cosmetic_a					= null;
 		TextView					tv_cosmetic_r					= null;
 		TextView					tv_cosmetic_h					= null;
@@ -657,26 +597,27 @@ public class MainNavigationDrawerActivity extends SherlockFragmentActivity
 
 					SharedPreferences prefs = Utils.getSharedPreferences( getActivity().getApplicationContext() );
 					c_a_c_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_acquisition_percentage_editText );
-					a_a_c_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_advanced_acquisition_percentage_editText );
+					
 					c_r_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_renovation_percentage_editText );
-					a_r_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_advanced_renovation_percentage_editText );
+					
 					c_h_c_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_holding_percentage_editText );
-					a_h_c_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_advanced_holding_percentage_editText );
+					
 					c_s_c_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_selling_percentage_editText );
-					a_s_c_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_advanced_selling_percentage_editText );
+					
 					c_p_m_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_profit_percentage_editText );
-					a_p_m_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_advanced_profit_percentage_editText );
+					
 					cosmeticPrice = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_purchase_price_editText );
 
 					tv_cosmetic_a = ( TextView ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_acquisition_price_editText );
-					tv_cosmetic_r = ( TextView ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_renovation_price_editText );
+					
 					tv_cosmetic_h = ( TextView ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_holding_price_editText );
+					
 					tv_cosmetic_s = ( TextView ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_selling_price_editText );
+					
 					tv_cosmetic_p = ( TextView ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_profit_price_editText );
 
 					tv_cosmetic_totalSale = ( TextView ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_sale_price_price_Text );
 
-					// cosmeticPrice = (EditText)findViewById(R.id.textMessage);
 					cosmeticPrice.addTextChangedListener( new TextWatcher()
 					{
 						public void afterTextChanged( Editable s )
@@ -709,17 +650,6 @@ public class MainNavigationDrawerActivity extends SherlockFragmentActivity
 							c_a_c_p.setText( String.valueOf( cosmetic_aqusition_cost_percent ) );
 						}
 
-						double advanced_aqusition_cost_percent = prefs.getInt( AppGlobal.APP_PREF_KEY_ADVANCED_ACQUISITION_COST_PERCENTAGE, -1 );
-						if( advanced_aqusition_cost_percent == -1 )
-						{
-							prefs.edit().putInt( AppGlobal.APP_PREF_KEY_ADVANCED_ACQUISITION_COST_PERCENTAGE, 5 );
-							a_a_c_p.setText( String.valueOf( 5 ) );
-						}
-						else
-						{
-							a_a_c_p.setText( String.valueOf( advanced_aqusition_cost_percent ) );
-						}
-
 						double cosmetic_renovation_percent = prefs.getInt( AppGlobal.APP_PREF_KEY_COSMETIC_RENOVATION_PERCENTAGE, -1 );
 						if( cosmetic_renovation_percent == -1 )
 						{
@@ -729,17 +659,6 @@ public class MainNavigationDrawerActivity extends SherlockFragmentActivity
 						else
 						{
 							c_r_p.setText( String.valueOf( cosmetic_renovation_percent ) );
-						}
-
-						double advanced_renovation_percent = prefs.getInt( AppGlobal.APP_PREF_KEY_ADVANCED_RENOVATION_PERCENTAGE, -1 );
-						if( advanced_renovation_percent == -1 )
-						{
-							prefs.edit().putInt( AppGlobal.APP_PREF_KEY_ADVANCED_RENOVATION_PERCENTAGE, 22 );
-							a_r_p.setText( String.valueOf( 22 ) );
-						}
-						else
-						{
-							a_r_p.setText( String.valueOf( advanced_renovation_percent ) );
 						}
 
 						double cosmetic_holding_cost_percent = prefs.getInt( AppGlobal.APP_PREF_KEY_COSMETIC_HOLDING_COST_PERCENTAGE, -1 );
@@ -753,17 +672,6 @@ public class MainNavigationDrawerActivity extends SherlockFragmentActivity
 							c_h_c_p.setText( String.valueOf( cosmetic_holding_cost_percent ) );
 						}
 
-						double advanced_holding_cost_percent = prefs.getInt( AppGlobal.APP_PREF_KEY_ADVANCED_HOLDING_COST_PERCENTAGE, -1 );
-						if( advanced_holding_cost_percent == -1 )
-						{
-							prefs.edit().putInt( AppGlobal.APP_PREF_KEY_ADVANCED_HOLDING_COST_PERCENTAGE, 4 );
-							a_h_c_p.setText( String.valueOf( 4 ) );
-						}
-						else
-						{
-							a_h_c_p.setText( String.valueOf( advanced_holding_cost_percent ) );
-						}
-
 						double cosmetic_selling_cost_percent = prefs.getInt( AppGlobal.APP_PREF_KEY_COSMETIC_SELLING_COST_PERCENTAGE, -1 );
 						if( cosmetic_selling_cost_percent == -1 )
 						{
@@ -775,17 +683,6 @@ public class MainNavigationDrawerActivity extends SherlockFragmentActivity
 							c_s_c_p.setText( String.valueOf( cosmetic_selling_cost_percent ) );
 						}
 
-						double advanced_selling_cost_percent = prefs.getInt( AppGlobal.APP_PREF_KEY_ADVANCED_SELLING_COST_PERCENTAGE, -1 );
-						if( advanced_selling_cost_percent == -1 )
-						{
-							prefs.edit().putInt( AppGlobal.APP_PREF_KEY_ADVANCED_SELLING_COST_PERCENTAGE, 4 );
-							a_s_c_p.setText( String.valueOf( 4 ) );
-						}
-						else
-						{
-							a_s_c_p.setText( String.valueOf( advanced_selling_cost_percent ) );
-						}
-
 						double cosmetic_profit_margin_percent = prefs.getInt( AppGlobal.APP_PREF_KEY_COSMETIC_PROFIT_MARGIN_PERCENTAGE, -1 );
 						if( cosmetic_profit_margin_percent == -1 )
 						{
@@ -795,17 +692,6 @@ public class MainNavigationDrawerActivity extends SherlockFragmentActivity
 						else
 						{
 							c_p_m_p.setText( String.valueOf( cosmetic_profit_margin_percent ) );
-						}
-
-						double advanced_profit_margin_percent = prefs.getInt( AppGlobal.APP_PREF_KEY_ADVANCED_PROFIT_MARGIN_PERCENTAGE, -1 );
-						if( advanced_profit_margin_percent == -1 )
-						{
-							prefs.edit().putInt( AppGlobal.APP_PREF_KEY_ADVANCED_PROFIT_MARGIN_PERCENTAGE, 15 );
-							a_p_m_p.setText( String.valueOf( 15 ) );
-						}
-						else
-						{
-							a_p_m_p.setText( String.valueOf( advanced_profit_margin_percent ) );
 						}
 					}
 
@@ -835,16 +721,7 @@ public class MainNavigationDrawerActivity extends SherlockFragmentActivity
 				default:
 					break;
 			}
-			/*
-			 * String option = getResources().getStringArray(
-			 * R.array.options_array )[i];
-			 * int imageId = getResources().getIdentifier( option.toLowerCase(
-			 * Locale.getDefault() ), "drawable", getActivity().getPackageName()
-			 * );
-			 * ( ( ImageView ) rootView.findViewById( R.id.image )
-			 * ).setImageResource( imageId );
-			 * getActivity().setTitle( option );
-			 */return rootView;
+			return rootView;
 		}
 
 		public void setupUI( View view )
@@ -904,6 +781,7 @@ public class MainNavigationDrawerActivity extends SherlockFragmentActivity
 			}
 			catch ( Exception ex )
 			{
+				
 			}
 		}
 	}
