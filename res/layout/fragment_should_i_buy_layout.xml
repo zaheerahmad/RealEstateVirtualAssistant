@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -7,6 +8,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="#F5F5F5"
         android:orientation="horizontal" >
 
         <RadioGroup
@@ -31,59 +33,87 @@
         </RadioGroup>
     </LinearLayout>
 
-    <TableLayout
-        android:id="@+id/fragment_should_i_buy_layout_tl_quickAnalysis"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:padding="15dp">
+        android:background="#F5F5F5"
+        android:orientation="horizontal"
+        android:padding="5dp" >
 
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:layout_weight="1"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="" >
-                </TextView>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:layout_marginRight="1dp"
-                android:layout_weight="1"
-                android:background="#E5E4E2"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Cosmetic renovation"
-                    android:textSize="15sp"
-                    android:textStyle="bold" >
-                </TextView>
-            </LinearLayout>
-        </TableRow>
-
-        <ScrollView
+        <RadioGroup
+            android:id="@+id/fragment_should_i_buy_layout_rdgroup_secondry"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RadioButton
+                android:id="@+id/fragment_should_i_buy_layout_rdbtn_cosmetic_renovation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Cosmetic renovation" />
+
+            <RadioButton
+                android:id="@+id/fragment_should_i_buy_layout_rdbtn_advanced_renovation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Advanced renovation" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp" >
 
             <TableLayout
                 android:id="@+id/score_table"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent" >
+                android:layout_height="wrap_content" >
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="" >
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:layout_marginRight="1dp"
+                        android:layout_weight="1"
+                        android:background="#E5E4E2"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cosmetic renovation"
+                            android:textSize="15sp"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:padding="10dp"/>
+                    </LinearLayout>
+                </TableRow>
 
                 <TableRow
                     android:layout_width="wrap_content"
@@ -177,7 +207,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:gravity="right"
-                            android:text="$" />
+                            android:text="" />
                     </LinearLayout>
                 </TableRow>
 
@@ -228,7 +258,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:gravity="right"
-                            android:text="$" />
+                            android:text="" />
                     </LinearLayout>
                 </TableRow>
 
@@ -279,7 +309,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:gravity="right"
-                            android:text="$" />
+                            android:text="" />
                     </LinearLayout>
                 </TableRow>
 
@@ -330,7 +360,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:gravity="right"
-                            android:text="$" />
+                            android:text="" />
                     </LinearLayout>
                 </TableRow>
 
@@ -381,7 +411,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:gravity="right"
-                            android:text="$" />
+                            android:text="" />
                     </LinearLayout>
                 </TableRow>
 
@@ -421,13 +451,400 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:gravity="right"
-                            android:text="$"
+                            android:text=""
                             android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </TableRow>
             </TableLayout>
-        </ScrollView>
-    </TableLayout>
+
+            <TableLayout
+                android:id="@+id/score_table1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+                
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="" >
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:layout_marginRight="1dp"
+                        android:layout_weight="1"
+                        android:background="#E5E4E2"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Advanced renovation"
+                            android:textStyle="bold"
+                            android:textSize="15sp"
+                            android:padding="10dp"/>
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Purchase price" >
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:layout_marginRight="1dp"
+                        android:layout_weight="1"
+                        android:background="#E5E4E2"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".10"
+                            android:gravity="right|center_vertical"
+                            android:text="$" />
+
+                        <EditText
+                            android:id="@+id/fragment_should_i_buy_layout_advanced_purchase_price_editText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="#99C68E"
+                            android:numeric="decimal" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Acquisition costs" >
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:layout_marginRight="1dp"
+                        android:layout_weight="1"
+                        android:background="#E5E4E2"
+                        android:orientation="horizontal" >
+
+                        <EditText
+                            android:id="@+id/fragment_should_i_buy_layout_advanced_acquisition_percentage_editText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:numeric="decimal" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".10"
+                            android:text="%" />
+
+                        <TextView
+                            android:id="@+id/fragment_should_i_buy_layout_advanced_acquisition_price_editText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="right"
+                            android:text="" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Renovation" >
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:layout_marginRight="1dp"
+                        android:layout_weight="1"
+                        android:background="#E5E4E2"
+                        android:orientation="horizontal" >
+
+                        <EditText
+                            android:id="@+id/fragment_should_i_buy_layout_advanced_renovation_percentage_editText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:numeric="decimal" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".10"
+                            android:text="%" />
+
+                        <TextView
+                            android:id="@+id/fragment_should_i_buy_layout_advanced_renovation_price_editText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="right"
+                            android:text="" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Holding costs" >
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:layout_marginRight="1dp"
+                        android:layout_weight="1"
+                        android:background="#E5E4E2"
+                        android:orientation="horizontal" >
+
+                        <EditText
+                            android:id="@+id/fragment_should_i_buy_layout_advanced_holding_percentage_editText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:numeric="decimal" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".10"
+                            android:text="%" />
+
+                        <TextView
+                            android:id="@+id/fragment_should_i_buy_layout_advanced_holding_price_editText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="right"
+                            android:text="" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Selling costs" >
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:layout_marginRight="1dp"
+                        android:layout_weight="1"
+                        android:background="#E5E4E2"
+                        android:orientation="horizontal" >
+
+                        <EditText
+                            android:id="@+id/fragment_should_i_buy_layout_advanced_selling_percentage_editText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:numeric="decimal" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".10"
+                            android:text="%" />
+
+                        <TextView
+                            android:id="@+id/fragment_should_i_buy_layout_advanced_selling_price_editText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="right"
+                            android:text="" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Profit margin" >
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:layout_marginRight="1dp"
+                        android:layout_weight="1"
+                        android:background="#E5E4E2"
+                        android:orientation="horizontal" >
+
+                        <EditText
+                            android:id="@+id/fragment_should_i_buy_layout_advanced_profit_percentage_editText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:numeric="decimal" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".10"
+                            android:text="%" />
+
+                        <TextView
+                            android:id="@+id/fragment_should_i_buy_layout_advanced_profit_price_editText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="right"
+                            android:text="" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Sale price required"
+                            android:textSize="15sp"
+                            android:textStyle="bold" >
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:layout_marginRight="1dp"
+                        android:layout_weight="1"
+                        android:background="#E5E4E2"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/fragment_should_i_buy_layout_advanced_sale_price_price_Text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="right"
+                            android:text=""
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
