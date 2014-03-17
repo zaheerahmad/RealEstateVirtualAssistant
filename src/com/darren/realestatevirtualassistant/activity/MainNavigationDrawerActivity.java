@@ -24,8 +24,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -561,18 +563,25 @@ public class MainNavigationDrawerActivity extends SherlockFragmentActivity
 	public static class RealEstateFragment extends SherlockFragment
 	{
 		public static final String	ARG_REALESTATE_OPTION_NUMBER	= "option_number";
+
 		EditText					c_a_c_p							= null;
 		EditText					c_r_p							= null;
 		EditText					c_h_c_p							= null;
 		EditText					c_s_c_p							= null;
 		EditText					c_p_m_p							= null;
 		EditText					cosmeticPrice					= null;
+
 		TextView					tv_cosmetic_a					= null;
 		TextView					tv_cosmetic_r					= null;
 		TextView					tv_cosmetic_h					= null;
 		TextView					tv_cosmetic_s					= null;
 		TextView					tv_cosmetic_p					= null;
 		TextView					tv_cosmetic_totalSale			= null;
+
+		RadioGroup					rg_secondry						= null;
+
+		TableLayout					tl_cosmetic						= null;
+		TableLayout					tl_advanced						= null;
 
 		public RealEstateFragment()
 		{
@@ -593,30 +602,66 @@ public class MainNavigationDrawerActivity extends SherlockFragmentActivity
 				case 0:
 					rootView = inflater.inflate( R.layout.fragment_should_i_buy_layout, container, false );
 
-					setupUI( rootView.findViewById( R.id.fragment_should_i_buy_layout_tl_quickAnalysis ) );
+					setupUI( rootView.findViewById( R.id.mainLayout ) );
 
 					SharedPreferences prefs = Utils.getSharedPreferences( getActivity().getApplicationContext() );
 					c_a_c_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_acquisition_percentage_editText );
-					
+
 					c_r_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_renovation_percentage_editText );
-					
+
 					c_h_c_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_holding_percentage_editText );
-					
+
 					c_s_c_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_selling_percentage_editText );
-					
+
 					c_p_m_p = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_profit_percentage_editText );
-					
+
 					cosmeticPrice = ( EditText ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_purchase_price_editText );
 
 					tv_cosmetic_a = ( TextView ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_acquisition_price_editText );
-					
+
+					tv_cosmetic_r = ( TextView ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_renovation_price_editText );
+
 					tv_cosmetic_h = ( TextView ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_holding_price_editText );
-					
+
 					tv_cosmetic_s = ( TextView ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_selling_price_editText );
-					
+
 					tv_cosmetic_p = ( TextView ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_profit_price_editText );
 
 					tv_cosmetic_totalSale = ( TextView ) rootView.findViewById( R.id.fragment_should_i_buy_layout_cosmetic_sale_price_price_Text );
+
+					tl_cosmetic = ( TableLayout ) rootView.findViewById( R.id.score_table );
+					tl_advanced = ( TableLayout ) rootView.findViewById( R.id.score_table1 );
+					tl_advanced.setVisibility( View.GONE );
+
+					rg_secondry = ( RadioGroup ) rootView.findViewById( R.id.fragment_should_i_buy_layout_rdgroup_secondry );
+
+					rg_secondry.setOnCheckedChangeListener( new OnCheckedChangeListener()
+					{
+						@Override
+						public void onCheckedChanged( RadioGroup group, int checkedId )
+						{
+
+							switch ( checkedId )
+							{
+								case R.id.fragment_should_i_buy_layout_rdbtn_cosmetic_renovation:
+									// TODO Something
+									// Toast.makeText(
+									// getActivity().getApplicationContext(),
+									// "Quick Analysis", Toast.LENGTH_LONG
+									// ).show();
+
+									tl_advanced.setVisibility( View.GONE );
+									tl_cosmetic.setVisibility( View.VISIBLE );
+
+									break;
+								case R.id.fragment_should_i_buy_layout_rdbtn_advanced_renovation:
+									// TODO Something
+									tl_advanced.setVisibility( View.VISIBLE );
+									tl_cosmetic.setVisibility( View.GONE );
+									break;
+							}
+						}
+					} );
 
 					cosmeticPrice.addTextChangedListener( new TextWatcher()
 					{
@@ -781,7 +826,7 @@ public class MainNavigationDrawerActivity extends SherlockFragmentActivity
 			}
 			catch ( Exception ex )
 			{
-				
+
 			}
 		}
 	}
